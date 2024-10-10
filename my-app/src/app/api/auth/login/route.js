@@ -49,9 +49,11 @@ export async function POST(req) {
     if (!isMatch) {
       return new Response(JSON.stringify({ message: 'Invalid credentials' }), { status: 401 });
     }
-
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const v = process.env.JWT_SECRET || "omar";
+    const token = jwt.sign({ id: user._id }, v , { expiresIn: '1h' });
+    console.log("messi");
     return new Response(JSON.stringify({ token }), { status: 200 });
+ 
   } catch (error) {
     return new Response(JSON.stringify({ message: 'Error logging in' }), { status: 500 });
   }
