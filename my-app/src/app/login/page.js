@@ -22,7 +22,7 @@ const Login = () => {
     if (res.ok) {
       const { token } = await res.json();
       localStorage.setItem('token', token);
-      router.push('/profile');
+      router.push('/');
     } else {
       console.error('Failed to log in');
     }
