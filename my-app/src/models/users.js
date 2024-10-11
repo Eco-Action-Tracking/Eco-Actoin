@@ -9,10 +9,12 @@ const userSchema = new Schema({
   isDeleted: { type: Boolean, default: false },
   userAppointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }],
   userOrders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
-  userDiscount : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Discount' }],  
+  userDiscount: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Discount' }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
 
-const User = mongoose.model('User', userSchema);
+// Check if the model is already compiled to avoid OverwriteModelError
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
 module.exports = User;
