@@ -1,5 +1,7 @@
+import { CartProvider } from "@/contexts/CartContext";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Import } from "lucide-react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,7 +25,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <CartProvider>{children} </CartProvider>
       </body>
     </html>
   );
