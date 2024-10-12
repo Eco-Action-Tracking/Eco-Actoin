@@ -28,7 +28,8 @@
     "stripe": "^17.2.0",
     "sweetalert2": "^11.14.2",
     "tailwind-merge": "^2.5.3",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "recharts": "^2.12.7"
   },
   "devDependencies": {
     "postcss": "^8",
