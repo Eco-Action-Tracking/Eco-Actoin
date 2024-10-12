@@ -1,46 +1,96 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { useCartOperations } from "../../hooks/useCart";
 import Image from "next/image";
-import { CreditCard } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Elements } from "@stripe/react-stripe-js";
+import StripePaymentForm from "@/components/StripePaymentForm";
+import stripePromise from "@/lib/stripe";
 
 const CartPage = () => {
   const { cart, removeFromCart, updateQuantity, getCartTotal } =
     useCartOperations();
-  const [isMounted, setIsMounted] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("credit_card");
-  const [cardNumber, setCardNumber] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
-  const [cvv, setCvv] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [clientSecret, setClientSecret] = useState("");
   const [paymentStatus, setPaymentStatus] = useState(null);
+  const [isMounted, setIsMounted] = useState(false); // Track if the component has mounted
 
   useEffect(() => {
     setIsMounted(true);
+    const total = getCartTotal();
+    fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Include the token from the cookie if needed
+        Authorization: `Bearer ${document.cookie.replace(
+          /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
+          "$1"
+        )}`,
+      },
+      body: JSON.stringify({ amount: total * 100 }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
   }, []);
 
-  if (!isMounted) {
-    return null;
-  }
+  const handlePaymentSuccess = async (paymentIntentId) => {
+    try {
+      const orderProducts = cart.map((item) => item._id);
+      const totalPrice = getCartTotal();
 
-  const handlePayment = async (e) => {
-    e.preventDefault();
-    setIsProcessing(true);
+      const response = await fetch("/api/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Include the token from the cookie
+          Authorization: `Bearer ${document.cookie.replace(
+            /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
+            "$1"
+          )}`,
+        },
+        body: JSON.stringify({
+          orderProducts,
+          totalPrice,
+          deliveryAddress,
+          paymentIntentId,
+        }),
+      });
 
-    // Simulating payment processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    // For demonstration, we'll consider the payment successful if the card number ends with '1234'
-    if (cardNumber.endsWith("1234")) {
-      setPaymentStatus("success");
-    } else {
-      setPaymentStatus("error");
+      if (response.ok) {
+        const { order } = await response.json();
+        setPaymentStatus({
+          type: "success",
+          message: `Payment successful! Order ID: ${order._id}`,
+        });
+        // Clear cart or perform other post-payment actions
+      } else {
+        throw new Error("Failed to create order");
+      }
+    } catch (error) {
+      console.error("Error creating order:", error);
+      setPaymentStatus({
+        type: "error",
+        message:
+          "Payment successful, but order creation failed. Please contact support.",
+      });
     }
-
-    setIsProcessing(false);
   };
+
+  const handlePaymentError = (message) => {
+    setPaymentStatus({ type: "error", message });
+  };
+
+  const appearance = {
+    theme: "stripe",
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
+
+  if (!isMounted) {
+    return null; // Return null on the server to prevent hydration mismatch
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row md:space-x-8">
@@ -102,95 +152,28 @@ const CartPage = () => {
           <p className="text-lg font-semibold mb-4">
             Total: ${getCartTotal().toFixed(2)}
           </p>
-          <form onSubmit={handlePayment}>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Payment Method
-              </label>
-              <select
-                value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              >
-                <option value="credit_card">Credit Card</option>
-                <option value="paypal">PayPal</option>
-              </select>
-            </div>
-            {paymentMethod === "credit_card" && (
-              <>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Card Number
-                  </label>
-                  <input
-                    type="text"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                    placeholder="1234 5678 9012 3456"
-                    required
-                  />
-                </div>
-                <div className="mb-4 flex space-x-4">
-                  <div className="w-1/2">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Expiry Date
-                    </label>
-                    <input
-                      type="text"
-                      value={expiryDate}
-                      onChange={(e) => setExpiryDate(e.target.value)}
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                      placeholder="MM/YY"
-                      required
-                    />
-                  </div>
-                  <div className="w-1/2">
-                    <label className="block text-sm font-medium text-gray-700">
-                      CVV
-                    </label>
-                    <input
-                      type="text"
-                      value={cvv}
-                      onChange={(e) => setCvv(e.target.value)}
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                      placeholder="123"
-                      required
-                    />
-                  </div>
-                </div>
-              </>
-            )}
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 flex items-center justify-center"
-              disabled={isProcessing}
-            >
-              {isProcessing ? (
-                <span>Processing...</span>
-              ) : (
-                <>
-                  <CreditCard className="mr-2" />
-                  Pay Now
-                </>
-              )}
-            </button>
-          </form>
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <StripePaymentForm
+                clientSecret={clientSecret}
+                onPaymentSuccess={handlePaymentSuccess}
+                onPaymentError={handlePaymentError}
+              />
+            </Elements>
+          )}
           {paymentStatus && (
             <Alert
               className="mt-4"
-              variant={paymentStatus === "success" ? "default" : "destructive"}
+              variant={
+                paymentStatus.type === "success" ? "default" : "destructive"
+              }
             >
               <AlertTitle>
-                {paymentStatus === "success"
+                {paymentStatus.type === "success"
                   ? "Payment Successful"
                   : "Payment Failed"}
               </AlertTitle>
-              <AlertDescription>
-                {paymentStatus === "success"
-                  ? "Your payment has been processed successfully."
-                  : "There was an error processing your payment. Please try again."}
-              </AlertDescription>
+              <AlertDescription>{paymentStatus.message}</AlertDescription>
             </Alert>
           )}
         </div>

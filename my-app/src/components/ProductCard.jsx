@@ -2,12 +2,22 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/contexts/CartContext";
+import Swal from "sweetalert2";
 
 const ProductCard = ({ product }) => {
   const { dispatch } = useCart();
 
   const handleAddToCart = () => {
     dispatch({ type: "ADD_TO_CART", payload: product });
+
+    Swal.fire({
+      title: "Added to Cart!",
+      text: `${product.name} has been added to your cart.`,
+      icon: "success",
+      confirmButtonText: "Continue Shopping",
+      timer: 3000,
+      timerProgressBar: true,
+    });
   };
 
   return (

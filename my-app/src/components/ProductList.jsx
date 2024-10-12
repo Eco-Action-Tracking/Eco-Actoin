@@ -8,10 +8,9 @@ const ProductList = ({ products }) => {
   // Calculate the products to display on the current page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  const currentProducts = Array.isArray(products)
+    ? products.slice(indexOfFirstProduct, indexOfLastProduct)
+    : [];
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);

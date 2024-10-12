@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useCart } from "@/contexts/CartContext";
+import Swal from "sweetalert2";
 
 export default function ProductDetailsPage({ params }) {
   const { dispatch } = useCart();
@@ -14,6 +15,15 @@ export default function ProductDetailsPage({ params }) {
   const handleAddToCart = () => {
     if (product) {
       dispatch({ type: "ADD_TO_CART", payload: product });
+
+      Swal.fire({
+        title: "Added to Cart!",
+        text: `${product.name} has been added to your cart.`,
+        icon: "success",
+        confirmButtonText: "Continue Shopping",
+        timer: 3000,
+        timerProgressBar: true,
+      });
     }
   };
 
