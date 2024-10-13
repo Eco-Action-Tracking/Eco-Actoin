@@ -21,7 +21,8 @@ const Login = () => {
 
     if (res.ok) {
       const { token } = await res.json();
-      localStorage.setItem('token', token);
+      // localStorage.setItem('token', token);
+      console.log(token);
       router.push('/');
     } else {
       console.error('Failed to log in');
