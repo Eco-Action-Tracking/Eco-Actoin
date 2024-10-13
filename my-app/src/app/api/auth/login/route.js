@@ -38,6 +38,11 @@
 //   }
 // }
 
+
+
+
+
+
 import { NextResponse } from "next/server";
 import connectDB from "../../../../db";
 import User from "../../../../models/users";
@@ -52,6 +57,7 @@ export async function POST(req) {
   const { email, password } = await req.json();
   console.log("Login attempt for email:", email);
 
+
   try {
     const user = await User.findOne({
       email,
@@ -59,6 +65,7 @@ export async function POST(req) {
       isActive: true,
     });
     if (!user) {
+
       console.log("User not found or inactive");
       return NextResponse.json(
         { message: "Invalid credentials or account disabled" },
@@ -68,6 +75,7 @@ export async function POST(req) {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+
       console.log("Password mismatch");
       return NextResponse.json(
         { message: "Invalid credentials" },
@@ -99,5 +107,6 @@ export async function POST(req) {
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json({ message: "Error logging in" }, { status: 500 });
+
   }
 }

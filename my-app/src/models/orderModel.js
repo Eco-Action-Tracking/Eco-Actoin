@@ -19,5 +19,5 @@ const orderSchema = new Schema({
   isDeleted: { type: Boolean, default: false },
 });
 
-const Order = mongoose.model("Order", orderSchema);
+const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
 module.exports = Order;

@@ -1,3 +1,4 @@
+
 // import { NextResponse } from 'next/server';
 // import jwt from 'jsonwebtoken';
 // import User from './models/users';
@@ -71,16 +72,19 @@ export async function middleware(request) {
     // في حالة فشل التحقق، يتم توجيه المستخدم إلى صفحة تسجيل الدخول
     console.error("Token verification failed:", error);
     return NextResponse.redirect(new URL("/login", request.url));
+
   }
 }
 
 // تحديد المسارات التي يتم تطبيق الـ middleware عليها
 export const config = {
   matcher: [
+
     "/profile/:path*", // مسار الملف الشخصي
     "/api/user/:path*", // مسارات API المتعلقة بالمستخدم
     "/api/orders/:path*", // مسارات API الخاصة بالطلبات
     "/api/appointments/:path*", // مسارات API الخاصة بالمواعيد
     "/api/discounts/:path*", // مسارات API الخاصة بالخصومات
+
   ],
 };
