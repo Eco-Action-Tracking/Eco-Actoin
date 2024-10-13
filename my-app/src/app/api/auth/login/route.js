@@ -116,7 +116,7 @@ export async function POST(req) {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     const serialized = serialize('token', token, {
-      httpOnly: true, // الكوكي غير متاحة لجافا سكريبت من جانب العميل
+      httpOnly: false, // الكوكي غير متاحة لجافا سكريبت من جانب العميل
       secure: process.env.NODE_ENV === 'production', // الكوكي آمنة في بيئة الإنتاج
       sameSite: 'strict', // الكوكي محمية من هجمات CSRF
       maxAge: 3600, // مدة صلاحية الكوكي (3600 ثانية = 1 ساعة)
