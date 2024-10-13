@@ -231,6 +231,19 @@ import ClothingLifecycle from '../components/ClothingLifecycle';
 // import CommunityShowcase from '../components/CommunityShowcase';
 import EnvironmentalImpact from '@/components/EnvironmentalImpact';
 import EcoFAQs from '@/components/EcoFAQs';
+// "use client";
+// import React, { useEffect, useState } from "react"; // تأكد من استيراد useState و useEffect
+// import { motion } from "framer-motion";
+// import {
+//   ChevronRight,
+//   Recycle,
+//   Shirt,
+//   Leaf,
+//   Sun,
+//   Wind,
+//   Droplet,
+//   Heart,
+// } from "lucide-react";
 
 const HomePage = () => {
   return (
@@ -249,3 +262,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
