@@ -17,11 +17,34 @@ const OrderList = () => {
         throw new Error('Failed to fetch orders');
       }
       const data = await response.json();
+      console.log(data); // Log the fetched data
       setOrders(data);
     } catch (err) {
       setError(err.message);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const updateOrderStatus = async (orderId) => {
+    try {
+      const response = await fetch(`/api/admin/orders/${orderId}`, {
+        method: 'PUT', // or 'PATCH'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'shipped' }) // Update as needed
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update order status');
+      }
+
+      // Refresh the orders list after updating
+      fetchOrders();
+    } catch (error) {
+      console.error('Error updating order status:', error);
+      setError(error.message);
     }
   };
 
@@ -69,9 +92,12 @@ const OrderList = () => {
             <div className="mt-3 flex flex-wrap items-center justify-between">
               <p className="text-purple-600 flex items-center">
                 <DollarSign className="mr-1" size={18} />
-                Total: ${order.total}
+                Total: ${order.total} {/* Ensure this is the correct field */}
               </p>
-              <button className="mt-2 md:mt-0 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors duration-300 flex items-center">
+              <button
+                className="mt-2 md:mt-0 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors duration-300 flex items-center"
+                onClick={() => updateOrderStatus(order._id)} // Call update function with order ID
+              >
                 <Truck className="mr-2" size={18} />
                 Update Status
               </button>

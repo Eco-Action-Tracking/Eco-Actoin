@@ -13,4 +13,4 @@ const contactSchema = new mongoose.Schema(
 
 const Contact = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
 
-module.exports = Contact; // Make sure to use module.exports
+module.exports = Contact; 

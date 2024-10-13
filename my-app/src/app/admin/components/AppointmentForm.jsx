@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { CalendarPlus, Clock, DollarSign, Users, Calendar } from 'lucide-react';
+import { CalendarPlus, Clock, Users, Calendar, Image } from 'lucide-react';
 
 const AvailabilityForm = () => {
   const [availability, setAvailability] = useState({ 
+    name: '', 
     available_date: '', 
     available_start_time: '', 
     available_end_time: '', 
-    price: '', 
+    img_url: '', 
     numSubscribers: '' 
   });
   const [error, setError] = useState('');
@@ -40,15 +41,15 @@ const AvailabilityForm = () => {
       const data = await response.json();
       setSuccess('Availability event created successfully!');
       setAvailability({ 
+        name: '', 
         available_date: '', 
         available_start_time: '', 
         available_end_time: '', 
-        price: '', 
+        img_url: '', 
         numSubscribers: '' 
       });
 
-      fetchAvailabilities();
-
+      fetchAvailabilities(); // Refresh the list of availabilities after submission
     } catch (err) {
       setError(err.message);
     }
@@ -81,6 +82,18 @@ const AvailabilityForm = () => {
           {error && <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">{error}</div>}
           {success && <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">{success}</div>}
           
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Event Name</label>
+            <input
+              type="text"
+              name="name"
+              value={availability.name}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black"
+              required
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-gray-700 font-medium mb-2">Available Date</label>
@@ -91,7 +104,7 @@ const AvailabilityForm = () => {
                   name="available_date"
                   value={availability.available_date}
                   onChange={handleChange}
-                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black" // Change to black
+                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black"
                   required
                 />
               </div>
@@ -105,12 +118,13 @@ const AvailabilityForm = () => {
                   name="available_start_time"
                   value={availability.available_start_time}
                   onChange={handleChange}
-                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black" // Change to black
+                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black"
                   required
                 />
               </div>
             </div>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-gray-700 font-medium mb-2">End Time</label>
@@ -121,26 +135,26 @@ const AvailabilityForm = () => {
                   name="available_end_time"
                   value={availability.available_end_time}
                   onChange={handleChange}
-                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black" // Change to black
+                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Price</label>
+              <label className="block text-gray-700 font-medium mb-2">Image URL</label>
               <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Image className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
-                  type="number"
-                  name="price"
-                  value={availability.price}
+                  type="text"
+                  name="img_url"
+                  value={availability.img_url}
                   onChange={handleChange}
-                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black" // Change to black
-                  required
+                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black"
                 />
               </div>
             </div>
           </div>
+
           <div>
             <label className="block text-gray-700 font-medium mb-2">Number of Subscribers</label>
             <div className="relative">
@@ -150,11 +164,12 @@ const AvailabilityForm = () => {
                 name="numSubscribers"
                 value={availability.numSubscribers}
                 onChange={handleChange}
-                className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black" // Change to black
+                className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-black"
                 required
               />
             </div>
           </div>
+
           <button type="submit" className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300 flex items-center justify-center w-full md:w-auto">
             <CalendarPlus className="mr-2" />
             Create Availability Event
@@ -172,19 +187,19 @@ const AvailabilityForm = () => {
               <div key={event._id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition duration-300">
                 <div className="flex items-center mb-2">
                   <Calendar className="text-indigo-600 mr-2" />
-                  <p className="font-semibold text-black">{new Date(event.available_date).toLocaleDateString()}</p> {/* Change to black */}
+                  <p className="font-semibold text-black">{event.name}</p>
+                </div>
+                <div className="flex items-center mb-2">
+                  <Image className="text-indigo-600 mr-2" />
+                  <img src={event.img_url} alt={event.name} className="w-20 h-20 object-cover rounded-md" />
                 </div>
                 <div className="flex items-center mb-2">
                   <Clock className="text-indigo-600 mr-2" />
-                  <p className="text-black">{event.available_start_time} - {event.available_end_time}</p> {/* Change to black */}
-                </div>
-                <div className="flex items-center mb-2">
-                  <DollarSign className="text-indigo-600 mr-2" />
-                  <p className="text-black">${event.price}</p> {/* Change to black */}
+                  <p className="text-black">{event.available_start_time} - {event.available_end_time}</p>
                 </div>
                 <div className="flex items-center">
                   <Users className="text-indigo-600 mr-2" />
-                  <p className="text-black">{event.numSubscribers} subscribers</p> {/* Change to black */}
+                  <p className="text-black">{event.numSubscribers} subscribers</p>
                 </div>
               </div>
             ))}
