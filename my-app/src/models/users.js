@@ -16,5 +16,4 @@ const userSchema = new Schema({
 
 // Check if the model is already compiled to avoid OverwriteModelError
 const User = mongoose.models.User || mongoose.model('User', userSchema);
-
 module.exports = User;
