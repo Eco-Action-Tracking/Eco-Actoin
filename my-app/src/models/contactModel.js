@@ -1,13 +1,27 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const contactSchema = new mongoose.Schema(
-  {
-    email: { type: String, required: true },
-    message: { type: String, required: true },
-  },
-  { timestamps: true }
-);
+// const contactSchema = new mongoose.Schema(
+//   {
+//     email: { type: String, required: true },
+//     message: { type: String, required: true },
+//   },
+//   { timestamps: true }
+// );
 
-const Contact = mongoose.model("Contact", contactSchema);
+// const Contact = mongoose.model("Contact", contactSchema);
 
-module.exports = Contact;
+// module.exports = Contact;
+
+
+
+
+import mongoose from 'mongoose';
+
+const ContactSchema = new mongoose.Schema({
+    firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  message: { type: String, required: true },
+});
+
+export default mongoose.models.Contact || mongoose.model('Contact', ContactSchema);
