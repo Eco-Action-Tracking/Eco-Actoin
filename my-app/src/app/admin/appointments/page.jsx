@@ -7,7 +7,7 @@ import AppointmentForm from '../components/AppointmentForm';
 const AppointmentsPage = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Manage Appointments</h1>
+      <h1 className="text-2xl font-bold mb-4"></h1>
       <AppointmentForm />
     </div>
   );
