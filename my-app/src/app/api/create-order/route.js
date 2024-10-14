@@ -40,10 +40,7 @@ export async function POST(request) {
     // Create order record
     const order = await Order.create({
       userId: decoded.id,
-      orderProducts: orderProducts.map((product) => ({
-        product: product.productId,
-        quantity: product.quantity,
-      })),
+      orderProducts: orderProducts.map((product) => product.productId),
       totalPrice,
       deliveryAddress,
       paymentId: payment._id,

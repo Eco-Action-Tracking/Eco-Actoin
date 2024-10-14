@@ -5,14 +5,7 @@ const orderSchema = new Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   discountId: { type: mongoose.Schema.Types.ObjectId, ref: "Discount" },
   orderProducts: [
-    {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
-      },
-      quantity: { type: Number, required: true },
-    },
+    { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
   ],
   totalPrice: { type: Number, required: true },
   status: { type: String, enum: ["pending", "completed"], default: "pending" },

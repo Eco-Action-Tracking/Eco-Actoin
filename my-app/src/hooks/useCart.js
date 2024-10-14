@@ -20,7 +20,11 @@ export const useCartOperations = () => {
   };
 
   const getCartTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cart.reduce((total, item) => total + item.price, 0);
+  };
+
+  const isInCart = (productId) => {
+    return cart.some((item) => item._id === productId);
   };
 
   return {
@@ -30,5 +34,6 @@ export const useCartOperations = () => {
     updateQuantity,
     clearCart,
     getCartTotal,
+    isInCart,
   };
 };

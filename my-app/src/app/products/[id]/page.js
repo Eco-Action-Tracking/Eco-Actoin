@@ -5,25 +5,40 @@ import { useCart } from "@/contexts/CartContext";
 import Swal from "sweetalert2";
 
 export default function ProductDetailsPage({ params }) {
-  const { dispatch } = useCart();
+  const { addToCart, cart } = useCart();
+
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const { id } = params;
 
+  const isInCart = (productId) => {
+    return cart.some((item) => item._id === productId);
+  };
+
   const handleAddToCart = () => {
     if (product) {
-      dispatch({ type: "ADD_TO_CART", payload: product });
-
-      Swal.fire({
-        title: "Added to Cart!",
-        text: `${product.name} has been added to your cart.`,
-        icon: "success",
-        confirmButtonText: "Continue Shopping",
-        timer: 3000,
-        timerProgressBar: true,
-      });
+      if (isInCart(product._id)) {
+        Swal.fire({
+          title: "Already in Cart!",
+          text: `${product.name} is already in your cart.`,
+          icon: "info",
+          confirmButtonText: "OK",
+          timer: 3000,
+          timerProgressBar: true,
+        });
+      } else {
+        addToCart(product);
+        Swal.fire({
+          title: "Added to Cart!",
+          text: `${product.name} has been added to your cart.`,
+          icon: "success",
+          confirmButtonText: "Continue Shopping",
+          timer: 3000,
+          timerProgressBar: true,
+        });
+      }
     }
   };
 
@@ -83,7 +98,7 @@ export default function ProductDetailsPage({ params }) {
           </div>
           <button
             onClick={handleAddToCart}
-            className="w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition duration-300 text-lg font-semibold"
+            className="w-full bg-indigo-500 text-white py-3 px-6 rounded-lg hover:bg-indigo-600 transition duration-300 text-lg font-semibold"
           >
             Add to Cart
           </button>

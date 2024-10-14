@@ -12,7 +12,8 @@
 //     useCartOperations();
 //   const [clientSecret, setClientSecret] = useState("");
 //   const [paymentStatus, setPaymentStatus] = useState(null);
-//   const [isMounted, setIsMounted] = useState(false); // Track if the component has mounted
+//   const [isMounted, setIsMounted] = useState(false);
+//   const [deliveryAddress, setDeliveryAddress] = useState("");
 
 //   useEffect(() => {
 //     setIsMounted(true);
@@ -21,7 +22,6 @@
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
-//         // Include the token from the cookie if needed
 //         Authorization: `Bearer ${document.cookie.replace(
 //           /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
 //           "$1"
@@ -35,14 +35,16 @@
 
 //   const handlePaymentSuccess = async (paymentIntentId) => {
 //     try {
-//       const orderProducts = cart.map((item) => item._id);
+//       const orderProducts = cart.map((item) => ({
+//         productId: item._id,
+//         quantity: item.quantity,
+//       }));
 //       const totalPrice = getCartTotal();
 
 //       const response = await fetch("/api/create-order", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
-//           // Include the token from the cookie
 //           Authorization: `Bearer ${document.cookie.replace(
 //             /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
 //             "$1"
@@ -89,7 +91,7 @@
 //   };
 
 //   if (!isMounted) {
-//     return null; // Return null on the server to prevent hydration mismatch
+//     return null;
 //   }
 
 //   return (
@@ -148,6 +150,15 @@
 
 //       <div className="md:w-1/3 mt-8 md:mt-0">
 //         <div className="bg-gray-100 p-6 rounded-lg">
+//           <h2 className="text-xl font-bold mb-4">Delivery Address</h2>
+//           <textarea
+//             value={deliveryAddress}
+//             onChange={(e) => setDeliveryAddress(e.target.value)}
+//             className="w-full p-2 border rounded mb-4"
+//             placeholder="Enter your delivery address"
+//             rows="3"
+//           />
+
 //           <h2 className="text-xl font-bold mb-4">Payment</h2>
 //           <p className="text-lg font-semibold mb-4">
 //             Total: ${getCartTotal().toFixed(2)}
@@ -183,7 +194,6 @@
 // };
 
 // export default CartPage;
-
 "use client";
 import React, { useState, useEffect } from "react";
 import { useCartOperations } from "../../hooks/useCart";
@@ -194,8 +204,7 @@ import StripePaymentForm from "@/components/StripePaymentForm";
 import stripePromise from "@/lib/stripe";
 
 const CartPage = () => {
-  const { cart, removeFromCart, updateQuantity, getCartTotal } =
-    useCartOperations();
+  const { cart, removeFromCart, getCartTotal } = useCartOperations();
   const [clientSecret, setClientSecret] = useState("");
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
@@ -223,7 +232,6 @@ const CartPage = () => {
     try {
       const orderProducts = cart.map((item) => ({
         productId: item._id,
-        quantity: item.quantity,
       }));
       const totalPrice = getCartTotal();
 
@@ -306,21 +314,6 @@ const CartPage = () => {
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <button
-                    onClick={() =>
-                      updateQuantity(item._id, Math.max(1, item.quantity - 1))
-                    }
-                    className="px-2 py-1 bg-gray-200 rounded"
-                  >
-                    -
-                  </button>
-                  <span className="mx-2">{item.quantity}</span>
-                  <button
-                    onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                    className="px-2 py-1 bg-gray-200 rounded"
-                  >
-                    +
-                  </button>
                   <button
                     onClick={() => removeFromCart(item._id)}
                     className="ml-4 text-red-500"
