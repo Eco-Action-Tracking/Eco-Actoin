@@ -55,8 +55,8 @@ const Pagination = ({
               onClick={() => paginate(number)}
               className={`px-3 py-1 border rounded ${
                 currentPage === number
-                  ? "bg-green-500 text-white"
-                  : "bg-white text-green-500 hover:bg-blue-100"
+                  ? "bg-indigo-500 text-white"
+                  : "bg-white text-indigo-500 hover:bg-blue-100"
               }`}
             >
               {number}

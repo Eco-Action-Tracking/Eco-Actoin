@@ -56,7 +56,7 @@
 //   };
 
 //   return (
-//     <motion.header 
+//     <motion.header
 //       initial={{ y: -100 }}
 //       animate={{ y: 0 }}
 //       transition={{ type: "spring", stiffness: 100 }}
@@ -64,7 +64,7 @@
 //     >
 //       <nav className="container mx-auto px-6 py-4">
 //         <div className="flex justify-between items-center">
-//           <motion.div 
+//           <motion.div
 //             whileHover={{ scale: 1.05 }}
 //             className="text-3xl font-bold text-white flex items-center"
 //           >
@@ -74,7 +74,7 @@
 //             </svg>
 //             EcoStitch
 //           </motion.div>
-          
+
 //           {/* Desktop Menu */}
 //           <div className="hidden md:flex items-center space-x-6">
 //             <ul className="flex space-x-6">
@@ -165,19 +165,22 @@
 
 // export default Header;
 
-
-
-
-
-
-
-
-
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Recycle, Shirt, Leaf, Heart, User, Menu, X, LogOut, ShoppingBag, UserCircle } from 'lucide-react';
-import Link from 'next/link';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  Recycle,
+  Shirt,
+  Leaf,
+  Heart,
+  User,
+  Menu,
+  X,
+  LogOut,
+  ShoppingBag,
+  UserCircle,
+} from "lucide-react";
+import Link from "next/link";
+import axios from "axios";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -187,12 +190,14 @@ const Header = () => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const { data } = await axios.get('/api/status', { withCredentials: true });
+        const { data } = await axios.get("/api/status", {
+          withCredentials: true,
+        });
         console.log(data);
         setIsLoggedIn(data.isLoggedIn);
         setUser(data.user);
       } catch (error) {
-        console.error('Error checking auth status:', error);
+        console.error("Error checking auth status:", error);
         setIsLoggedIn(false);
         setUser(null);
       }
@@ -205,30 +210,40 @@ const Header = () => {
   }, []);
 
   const menuItems = [
-    { name: 'Home', icon: <Heart className="w-5 h-5" />, href: '/' },
-    { name: 'Products', icon: <ShoppingBag className="w-5 h-5" />, href: '/products' },
-    { name: 'About Us', icon: <Leaf className="w-5 h-5" />, href: '/About' },
-    { name: 'Contact Us', icon: <Recycle className="w-5 h-5" />, href: '/contact' },
+    { name: "Home", href: "/" },
+    {
+      name: "Products",
+      href: "/products",
+    },
+    { name: "About Us", href: "/About" },
+    {
+      name: "Contact Us",
+      href: "/contact",
+    },
+    {
+      name: "cart",
+      href: "/cart",
+    },
   ];
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('/api/auth/logout', {
-        method: 'POST',
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        credentials: 'include',
+        credentials: "include",
       });
 
       if (response.ok) {
         setIsLoggedIn(false);
-        window.location.href = '/';
+        window.location.href = "/";
       } else {
-        console.error('Logout failed');
+        console.error("Logout failed");
       }
     } catch (error) {
-      console.error('Error during logout:', error);
+      console.error("Error during logout:", error);
     }
   };
 
@@ -245,9 +260,26 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             className="text-3xl font-bold text-white flex items-center"
           >
-            <svg className="w-10 h-10 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 9L15 3M15 3L9 9M15 3V21" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M3 15L9 21M9 21L15 15M9 21V3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              className="w-10 h-10 mr-2"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 9L15 3M15 3L9 9M15 3V21"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M3 15L9 21M9 21L15 15M9 21V3"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             EcoStitch
           </motion.div>
@@ -257,7 +289,10 @@ const Header = () => {
             <ul className="flex space-x-6">
               {menuItems.map((item, index) => (
                 <motion.li key={index} whileHover={{ scale: 1.1 }}>
-                  <Link href={item.href} className="text-white hover:text-indigo-200 transition duration-300 flex items-center">
+                  <Link
+                    href={item.href}
+                    className="text-white hover:text-indigo-200 transition duration-300 flex items-center"
+                  >
                     <span className="mr-2">{item.icon}</span>
                     {item.name}
                   </Link>
@@ -302,8 +337,15 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white">
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-white"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
@@ -320,7 +362,10 @@ const Header = () => {
             <ul className="flex flex-col space-y-4">
               {menuItems.map((item, index) => (
                 <motion.li key={index} whileHover={{ scale: 1.05 }}>
-                  <Link href={item.href} className="text-white hover:text-indigo-200 transition duration-300 flex items-center">
+                  <Link
+                    href={item.href}
+                    className="text-white hover:text-indigo-200 transition duration-300 flex items-center"
+                  >
                     <span className="mr-2">{item.icon}</span>
                     {item.name}
                   </Link>
