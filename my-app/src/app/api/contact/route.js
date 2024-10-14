@@ -32,13 +32,13 @@
 
 
 
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';// لإنشاء استجابات HTTP 
 import dbConnect from '../../../db';
 import Contact from '../../../models/contactModel';
 
 export async function POST(request) {
-  await dbConnect();
-  const body = await request.json();
+  await dbConnect();//التأكد من أن الاتصال
+  const body = await request.json();//استخراج البيانات
 
   try {
     const newContact = new Contact(body);

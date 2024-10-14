@@ -44,14 +44,14 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div
-        className="bg-green-900 text-white py-16 bg-cover bg-center flex items-center justify-center"
+        className="bg-indigo-900 text-white py-16 bg-cover bg-center flex items-center justify-center"
         style={{
           backgroundImage: `url('https://images.squarespace-cdn.com/content/v1/59f38ad78a02c7a1de136989/1551980990430-CYJP90CLSFL5GJ1JTNO9/image-asset.jpeg')`,
         }}
       >
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-xl text-green-100 max-w-2xl mx-auto">
+          <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
             We're here to help and answer any questions you might have. 
             We look forward to hearing from you.
           </p>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                     id="firstName"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     placeholder="John"
                     required
                   />
@@ -89,7 +89,7 @@ export default function ContactPage() {
                     id="lastName"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     placeholder="Doe"
                     required
                   />
@@ -104,7 +104,7 @@ export default function ContactPage() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   placeholder="john@example.com"
                   required
                 />
@@ -118,14 +118,14 @@ export default function ContactPage() {
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   placeholder="How can we help you?"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className={`w-full bg-green-600 text-white py-2 px-4 rounded-md ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-700'} transition-colors font-medium`}
+                className={`w-full bg-indigo-600 text-white py-2 px-4 rounded-md ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'} transition-colors font-medium`}
                 disabled={loading}
               >
                 {loading ? 'Sending...' : 'Send Message'}
@@ -141,12 +141,12 @@ export default function ContactPage() {
                 <ContactItem 
                   icon={<Phone className="h-6 w-6" />}
                   title="Phone"
-                  content="+1 (555) 123-4567"
+                  content="+1 (333) 123-4567"
                 />
                 <ContactItem 
                   icon={<Mail className="h-6 w-6" />}
                   title="Email"
-                  content="support@ecofriendly.com"
+                  content="omar@gamil.com"
                 />
                 <ContactItem 
                   icon={<MapPin className="h-6 w-6" />}
@@ -195,7 +195,7 @@ export default function ContactPage() {
 function ContactItem({ icon, title, content }) {
   return (
     <div className="flex items-start">
-      <div className="flex-shrink-0 h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 mr-4">
+      <div className="flex-shrink-0 h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 mr-4">
         {icon}
       </div>
       <div>
@@ -208,7 +208,7 @@ function ContactItem({ icon, title, content }) {
 
 function FAQItem({ question, answer }) {
   return (
-    <div className="border-l-4 border-green-500 pl-4">
+    <div className="border-l-4 border-indigo-500 pl-4">
       <h3 className="text-lg font-medium text-gray-900 mb-2">{question}</h3>
       <p className="text-gray-600">{answer}</p>
     </div>

@@ -28,9 +28,9 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ scale: 1.05 }}
-              className="text-center p-6 border rounded-lg shadow-lg bg-green-50"
+              className="text-center p-6 border rounded-lg shadow-lg bg-indigo-50"
             >
-              <div className="text-green-600 mb-4 flex justify-center">{service.icon}</div>
+              <div className="text-indigo-600 mb-4 flex justify-center">{service.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
               <p className="text-gray-600">{service.description}</p>
             </motion.div>

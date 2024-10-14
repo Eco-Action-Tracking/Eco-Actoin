@@ -12,13 +12,13 @@ const ClothingLifecycle = () => {
   ];
 
   return (
-    <section className="py-20 bg-green-50">
+    <section className="py-20 bg-indigo-200"> {/* Changed to indigo-200 */}
       <div className="container mx-auto px-6">
         <motion.h2 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-4xl font-bold text-center mb-12 text-indigo-600"
         >
           The Journey of Your Clothes
         </motion.h2>
@@ -32,7 +32,7 @@ const ClothingLifecycle = () => {
               className="w-full sm:w-1/2 md:w-1/5 p-4"
             >
               <div className="bg-white rounded-lg shadow-lg p-6 h-full flex flex-col items-center">
-                <div className="text-green-600 mb-4">{stage.icon}</div>
+                <div className="text-indigo-600 mb-4">{stage.icon}</div>
                 <h3 className="text-xl font-semibold mb-2 text-center">{stage.title}</h3>
                 <p className="text-gray-600 text-center">{stage.description}</p>
               </div>

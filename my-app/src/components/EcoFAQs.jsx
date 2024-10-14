@@ -23,13 +23,13 @@ const EcoFAQs = () => {
   ];
 
   return (
-    <section id="eco-faqs" className="py-20 bg-green-50">
+    <section id="eco-faqs" className="py-20 bg-indigo-100"> {/* Changed to indigo-100 */}
       <div className="container mx-auto px-6">
         <motion.h2 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-center mb-12 text-green-800"
+          className="text-4xl font-bold text-center mb-12 text-indigo-800"
         >
           Everything You Need to Know About Recycling
         </motion.h2>
@@ -43,8 +43,8 @@ const EcoFAQs = () => {
               className="bg-white p-6 rounded-lg shadow-lg"
             >
               <div className="flex items-center mb-4">
-                <HelpCircle className="text-green-600 mr-2" size={24} />
-                <h3 className="text-xl font-semibold text-green-800">{faq.question}</h3>
+                <HelpCircle className="text-indigo-600 mr-2" size={24} />
+                <h3 className="text-xl font-semibold text-indigo-800">{faq.question}</h3>
               </div>
               <p className="text-gray-600">{faq.answer}</p>
             </motion.div>
@@ -56,10 +56,10 @@ const EcoFAQs = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="text-lg text-green-800 font-semibold">
+          <p className="text-lg text-indigo-800 font-semibold">
             Remember: Every piece of clothing you recycle helps protect the environment and build a more sustainable future!
           </p>
-          <Recycle className="text-green-600 mx-auto mt-4" size={48} />
+          <Recycle className="text-indigo-600 mx-auto mt-4" size={48} />
         </motion.div>
       </div>
     </section>
