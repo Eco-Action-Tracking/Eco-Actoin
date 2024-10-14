@@ -12,11 +12,7 @@ const appointmentSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    payment_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Payment",
-      required: true,
-    },
+    
     status: {
       type: String,
       enum: ["scheduled", "completed"],

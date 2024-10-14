@@ -4,7 +4,7 @@ import { Sun, Wind, Droplet } from 'lucide-react';
 
 const Whatdo = () => {
   return (
-    <section id="about" className="py-20 bg-green-100">
+    <section id="about" className="py-20 bg-indigo-100">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -12,7 +12,7 @@ const Whatdo = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-4xl font-bold mb-6">What do you do</h2>
+          <h2 className="text-4xl font-bold mb-6">What we do?</h2>
           <p className="text-gray-700 mb-8 text-lg leading-relaxed">
             We are an innovative company aimed at recycling used clothes and transforming them into new, useful products.
             Our goal is to preserve the environment and reduce textile waste while offering stylish and modern designs.
@@ -23,7 +23,7 @@ const Whatdo = () => {
               <p>Renewable Energy</p>
             </motion.div>
             <motion.div whileHover={{ scale: 1.1 }} className="text-center">
-              <Wind size={40} className="text-blue-500 mx-auto mb-2" />
+              <Wind size={40} className="text-indigo-500 mx-auto mb-2" />
               <p>Clean Air</p>
             </motion.div>
             <motion.div whileHover={{ scale: 1.1 }} className="text-center">
