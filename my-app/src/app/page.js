@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react"; // تأكد من استيراد useState و useEffect
 import { motion } from "framer-motion";
+
+import AvailableEvents from "../components/availableEvents/available";
 import {
   ChevronRight,
   Recycle,
@@ -18,6 +20,7 @@ const HomePage = () => {
       <Header />
       <Hero />
       <Services />
+      <AvailableEvents/>
       <About />
       <Footer />
     </div>

@@ -1,38 +1,47 @@
 
-// import { NextResponse } from 'next/server';
-// import jwt from 'jsonwebtoken';
-// import User from './models/users';
-// import connectDB from './db';
+// import { NextResponse } from "next/server";
+// import { jwtVerify } from "jose"; // مكتبة jose للتحقق من JWT
 
-// export async function middleware(req) {
-//   const token = req.cookies.get('token');
+// export async function middleware(request) {
+//   console.log("Middleware executing");
 
+//   // استخراج الكوكي الخاصة بالرمز
+//   const token = request.cookies.get("token")?.value;
+//   console.log("Token from cookies:", token);
+
+//   // إذا لم يكن هناك رمز JWT، قم بتوجيه المستخدم إلى صفحة تسجيل الدخول
 //   if (!token) {
-//     return NextResponse.redirect(new URL('/login', req.url));
+//     console.log("No token found, redirecting to login");
+//     return NextResponse.redirect(new URL("/login", request.url));
 //   }
 
 //   try {
-//     // Verify token
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     console.log("Attempting to verify token");
 
-//     // Connect to DB
-//     await connectDB();
+//     // التحقق من صحة الرمز باستخدام مكتبة jose
+//     const { payload } = await jwtVerify(
+//       token,
+//       new TextEncoder().encode(process.env.JWT_SECRET)
+//     );
 
-//     // Check if user is active and not deleted
-//     const user = await User.findById(decoded.id);
-//     if (!user || user.isDeleted || !user.isActive) {
-//       return NextResponse.redirect(new URL('/login', req.url));
-//     }
+//     // عرض المحتوى المشفر من الـ JWT
+//     console.log("Token verified, payload:", payload);
 
-//     return NextResponse.next();
+//     // السماح بالمرور إلى الصفحة المطلوبة إذا كان الرمز صالحاً
+//     const response = NextResponse.next();
+
+//     // إضافة بيانات المستخدم إلى ترويسة الرد
+//     response.headers.set("user", JSON.stringify(payload));
+//     return response;
 //   } catch (error) {
-//     return NextResponse.redirect(new URL('/login', req.url));
+//     // في حالة فشل التحقق، يتم توجيه المستخدم إلى صفحة تسجيل الدخول
+//     console.error("Token verification failed:", error);
+//     return NextResponse.redirect(new URL("/login", request.url));
+
 //   }
 // }
-
-// export const config = {
-//   matcher: ['/profile/:path*'],
-// };
+// middleware.js
+// middleware.js
 
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose"; // مكتبة jose للتحقق من JWT
@@ -65,14 +74,13 @@ export async function middleware(request) {
     // السماح بالمرور إلى الصفحة المطلوبة إذا كان الرمز صالحاً
     const response = NextResponse.next();
 
-    // إضافة بيانات المستخدم إلى ترويسة الرد
-    response.headers.set("user", JSON.stringify(payload));
+    // إضافة userId إلى ترويسة الطلب
+    response.headers.set("userId", payload.id); // تأكد من استخدام 'id' بدلاً من 'userId'
     return response;
   } catch (error) {
     // في حالة فشل التحقق، يتم توجيه المستخدم إلى صفحة تسجيل الدخول
     console.error("Token verification failed:", error);
     return NextResponse.redirect(new URL("/login", request.url));
-
   }
 }
 
