@@ -42,10 +42,10 @@
 
 
 
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Recycle } from 'lucide-react';
+import Link from 'next/link';
 
 const Hero = () => {
   const images = [
@@ -65,7 +65,7 @@ const Hero = () => {
   }, [images.length]);
 
   return (
-    <div className="relative h-[500px] overflow-hidden">
+    <div className="relative h-screen overflow-hidden">
       {/* Image Slider */}
       {images.map((image, index) => (
         <motion.div
@@ -79,7 +79,7 @@ const Hero = () => {
       ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-green-600 bg-opacity-20" /> {/* Reduced opacity */}
+      <div className="absolute inset-0 bg-indigo-600 bg-opacity-20" /> {/* Changed to indigo */}
 
       {/* Content */}
       <div className="container mx-auto px-6 py-10 relative h-full flex justify-center items-center">
@@ -91,14 +91,11 @@ const Hero = () => {
         >
           <h1 className="text-4xl font-bold mb-4">Recycle Your Clothes, Save Our Planet</h1>
           <p className="text-lg mb-6">We transform your old clothes into new, innovative designs</p>
-          {/* <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-green-600 font-bold py-2 px-4 rounded-full inline-flex items-center text-lg"
-          >
-            Get Started
-            <ChevronRight className="ml-2" />
-          </motion.button> */}
+          <Link href="/products">
+            <button className="bg-indigo-400 text-white py-2 px-8 rounded-full hover:bg-indigo-700 transition-colors"> {/* Changed to indigo */}
+              View Our Products
+            </button>
+          </Link>
         </motion.div>
 
         {/* Rotating Icon */}

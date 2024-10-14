@@ -222,11 +222,11 @@
 'use client';
 
 import React from 'react';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Whatdo from '../components/Whatdo';
-import Footer from '../components/Footer';
+// import Footer from '../components/Footer';
 import ClothingLifecycle from '../components/ClothingLifecycle';
 // import CommunityShowcase from '../components/CommunityShowcase';
 import EnvironmentalImpact from '@/components/EnvironmentalImpact';
@@ -248,7 +248,7 @@ import EcoFAQs from '@/components/EcoFAQs';
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100">
-      <Header />
+      {/* <Header /> */}
       <Hero />
       <Services />
       <Whatdo />
@@ -256,7 +256,7 @@ const HomePage = () => {
       {/* <CommunityShowcase /> */}
       <EnvironmentalImpact />
       <EcoFAQs />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

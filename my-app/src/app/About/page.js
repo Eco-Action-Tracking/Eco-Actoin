@@ -61,7 +61,7 @@ export default function AboutPage() {
             <TeamMember 
               name="John Doe" 
               position="Founder & CEO" 
-              imageUrl="https://th.bing.com/th/id/R.b2f04f26111ea9710e550ad663ba7c3d?rik=2NgnpFreMkcALA&riu=http%3a%2f%2ftraverze.com%2fwp-content%2fuploads%2f2016%2f09%2fhome3.jpg&ehk=CnPpXb3zTgbW7WRBaMKOsKv9pwTN8jLX3kAgQUfsB3Y%3d&risl=&pid=ImgRaw&r=0" // ضع مسار الصورة
+              imageUrl="https://i.pravatar.cc/150?img=8" // ضع مسار الصورة
             />
             <TeamMember 
               name="Jane Smith" 
@@ -77,7 +77,7 @@ export default function AboutPage() {
         </section>
 
         {/* Call to Action */}
-        <section className="bg-green-100 py-12 text-center">
+        {/* <section className="bg-green-100 py-12 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Join Our Mission</h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-6">
             Ready to make a difference? Get involved in our eco-friendly initiatives and help us create a more sustainable world.
@@ -85,7 +85,7 @@ export default function AboutPage() {
           <button className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
             Learn More
           </button>
-        </section>
+        </section> */}
       </div>
     </div>
   );
