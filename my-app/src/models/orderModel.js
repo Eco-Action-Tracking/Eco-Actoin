@@ -6,6 +6,16 @@ const orderSchema = new Schema({
   discountId: { type: mongoose.Schema.Types.ObjectId, ref: "Discount" },
   orderProducts:[
  { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true }],
+  // orderProducts: [
+  //   {
+  //     product: {
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: "Product",
+  //       required: true,
+  //     },
+  //     quantity: { type: Number, required: true },
+  //   },
+  // ],
   totalPrice: { type: Number, required: true },
   status: { type: String, enum: ["pending", "completed"], default: "pending" },
   deliveryAddress: { type: String },
@@ -18,5 +28,5 @@ const orderSchema = new Schema({
   isDeleted: { type: Boolean, default: false },
 });
 
-const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
+const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 module.exports = Order;
