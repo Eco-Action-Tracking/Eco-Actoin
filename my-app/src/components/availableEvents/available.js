@@ -132,7 +132,7 @@
 //     return <div className="text-center py-20 text-red-500">Error: {error}</div>;
 
 //   return (
-//     <section id="available-events" className="py-20 bg-green-50">
+//     <section id="available-events" className="py-20 bg-indigo-50">
 //       <div className="container mx-auto px-6">
 //         <motion.div
 //           initial={{ opacity: 0, y: 50 }}
@@ -140,7 +140,7 @@
 //           transition={{ duration: 0.5 }}
 //           className="text-center mb-12"
 //         >
-//           <h2 className="text-4xl font-bold mb-4 text-green-800">
+//           <h2 className="text-4xl font-bold mb-4 text-indigo-800">
 //             Available Work Shops
 //           </h2>
 //           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -156,24 +156,24 @@
 //             >
 //               <div className="p-6">
 //                 <div className="flex items-center mb-4">
-//                   <Calendar className="text-green-500 mr-2" />
+//                   <Calendar className="text-indigo-500 mr-2" />
 //                   <span className="text-gray-700">
 //                     {new Date(event.available_date).toLocaleDateString()}
 //                   </span>
 //                 </div>
 //                 <div className="flex items-center mb-4">
-//                   <Clock className="text-green-500 mr-2" />
+//                   <Clock className="text-indigo-500 mr-2" />
 //                   <span className="text-gray-700">
 //                     {event.available_start_time} - {event.available_end_time}
 //                   </span>
 //                 </div>
 //                 <div className="flex items-center mb-6">
-//                   <UsersRound className="text-green-500 mr-2" />
+//                   <UsersRound className="text-indigo-500 mr-2" />
 //                   <span className="text-gray-700">{event.numSubscribers}</span>
 //                 </div>
 //                 <button
 //                   onClick={() => handleBook(event)}
-//                   className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300"
+//                   className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
 //                 >
 //                   Book Now
 //                 </button>
@@ -292,7 +292,7 @@ if (token) {
     return <div className="text-center py-20 text-red-500">Error: {error}</div>;
 
   return (
-    <section id="available-events" className="py-20 bg-green-50">
+    <section id="available-events" className="py-20 bg-indigo-50">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -300,7 +300,7 @@ if (token) {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4 text-green-800">
+          <h2 className="text-4xl font-bold mb-4 text-indigo-800">
             Available Work Shops
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -316,24 +316,24 @@ if (token) {
             >
               <div className="p-6">
                 <div className="flex items-center mb-4">
-                  <Calendar className="text-green-500 mr-2" />
+                  <Calendar className="text-indigo-500 mr-2" />
                   <span className="text-gray-700">
                     {new Date(event.available_date).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex items-center mb-4">
-                  <Clock className="text-green-500 mr-2" />
+                  <Clock className="text-indigo-500 mr-2" />
                   <span className="text-gray-700">
                     {event.available_start_time} - {event.available_end_time}
                   </span>
                 </div>
                 <div className="flex items-center mb-6">
-                  <UsersRound className="text-green-500 mr-2" />
+                  <UsersRound className="text-indigo-500 mr-2" />
                   <span className="text-gray-700">{event.numSubscribers}</span>
                 </div>
                 <button
                   onClick={() => handleBook(event)}
-                  className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300"
+                  className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
                 >
                   Book Now
                 </button>
