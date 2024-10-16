@@ -118,7 +118,7 @@ const EditProfile = ({ user }) => {
       transition={{ duration: 0.5 }}
       className="bg-white p-6 rounded-lg shadow-lg"
     >
-      <h2 className="text-2xl font-semibold mb-4 text-green-800">Edit Profile</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-indigo-600">Edit Profile</h2>
       <form onSubmit={handleProfileUpdate} className="space-y-4">
         <div>
           <label htmlFor="name" className="block mb-1 text-gray-700">Name</label>
@@ -127,7 +127,7 @@ const EditProfile = ({ user }) => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
         </div>
         <div>
@@ -137,7 +137,7 @@ const EditProfile = ({ user }) => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
         </div>
         <div>
@@ -147,10 +147,10 @@ const EditProfile = ({ user }) => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
         </div>
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300">
+        <button type="submit" className="bg-indigo-400 text-white px-4 py-2 rounded-md hover:bg-indigo-500 transition duration-300">
           Update Profile
         </button>
       </form>
