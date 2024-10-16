@@ -253,9 +253,137 @@
 
 
 
+// "use client";
+// import { useState } from 'react';
+// import { useRouter } from 'next/navigation';
+
+// const Login = () => {
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const router = useRouter();
+
+//   const handleLogin = async (e) => {
+//     e.preventDefault();
+
+//     const res = await fetch('/api/auth/login', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ email, password }),
+//     });
+
+//     if (res.ok) {
+//       const { token } = await res.json();
+//       console.log(token);//يستخرج التوكن من  استجابة الخادم.
+//       router.push('/');
+//     } else {
+//       console.error('Login failed');
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-indigo-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+//       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg border-2 border-indigo-200">
+//         <div>
+//           <h2 className="mt-6 text-center text-3xl font-extrabold text-indigo-800">
+//             Log in to your account
+//           </h2>
+//           <p className="mt-2 text-center text-sm text-indigo-600">
+//             Or{' '}
+//             <button
+//               onClick={() => router.push('/signup')}
+//               className="font-medium text-indigo-600 hover:text-indigo-500"
+//             >
+//               create a new account
+//             </button>
+//           </p>
+//         </div>
+//         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+//           <div className="rounded-md shadow-sm space-y-4">
+//             <div>
+//               <label htmlFor="email" className="sr-only">
+//                 Email Address
+//               </label>
+//               <input
+//                 id="email"
+//                 type="email"
+//                 placeholder="Email Address"
+//                 value={email}
+//                 onChange={(e) => setEmail(e.target.value)}
+//                 required// الحقول إلزامية 
+//                 className="appearance-none rounded-md relative block w-full px-3 py-2 border border-indigo-300 placeholder-indigo-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+//               />
+//             </div>
+//             <div>
+//               <label htmlFor="password" className="sr-only">
+//                 Password
+//               </label>
+//               <input
+//                 id="password"
+//                 type="password"
+//                 placeholder="Password"
+//                 value={password}
+//                 onChange={(e) => setPassword(e.target.value)}
+//                 required
+//                 className="appearance-none rounded-md relative block w-full px-3 py-2 border border-indigo-300 placeholder-indigo-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+//               />
+//             </div>
+//           </div>
+
+//           <div className="flex items-center justify-between">
+//             <div className="flex items-center">
+//               <input
+//                 id="remember-me"
+//                 name="remember-me"
+//                 type="checkbox"
+//                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-indigo-300 rounded"
+//               />
+//               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+//                 Remember me
+//               </label>
+//             </div>
+
+//             <div className="text-sm">
+//               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+//                 Forgot your password?
+//               </a>
+//             </div>
+//           </div>
+
+//           <div>
+//             <button
+//               type="submit"
+//               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+//             >
+//               Log In
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Recycle, LogIn, UserPlus } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -264,13 +392,11 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     const res = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-
     if (res.ok) {
       const { token } = await res.json();
       console.log(token);
@@ -281,36 +407,31 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-indigo-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg border-2 border-indigo-200">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-indigo-800">
-            Log in to your account
+        <div className="text-center">
+          <Recycle className="mx-auto h-12 w-12 text-indigo-600" />
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+            Welcome Back
           </h2>
-          <p className="mt-2 text-center text-sm text-indigo-600">
-            Or{' '}
-            <button
-              onClick={() => router.push('/signup')}
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              create a new account
-            </button>
+          <p className="mt-2 text-sm text-gray-600">
+            Log in to continue your journey in recycling clothes
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">
-                Email Address
+                Email
               </label>
               <input
                 id="email"
                 type="email"
-                placeholder="Email Address"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-indigo-300 placeholder-indigo-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               />
             </div>
             <div>
@@ -324,40 +445,36 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-indigo-300 placeholder-indigo-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-indigo-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Forgot your password?
-              </a>
-            </div>
-          </div>
 
           <div>
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
             >
+              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <LogIn className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+              </span>
               Log In
             </button>
           </div>
         </form>
+        <div className="text-center">
+          <p className="mt-2 text-sm text-gray-600">
+            Don't have an account?{' '}
+            <button
+              onClick={() => router.push('/signup')}
+              className="font-medium text-indigo-600 hover:text-indigo-500 flex items-center justify-center"
+            >
+              <UserPlus className="h-4 w-4 ml-1" />
+              Sign Up
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

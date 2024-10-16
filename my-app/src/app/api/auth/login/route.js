@@ -90,42 +90,42 @@ import connectDB from '../../../../db';
 import User from '../../../../models/users'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { serialize } from 'cookie';
+import { serialize } from 'cookie';// لتحويل الكوكي إلى سلسلة نصية
 
-export async function POST(req) {
+export async function POST(req) {//لمعالجة طلب تسجيل الدخول
   console.log('Login route hit');
   await connectDB();
 
   const { email, password } = await req.json();
   console.log('Login attempt for email:', email);
 
-  try {
+  try {//تحقق من وجود المستخدم 
     const user = await User.findOne({ email, isDeleted: false, isActive: true });
     if (!user) {
       console.log('User not found or inactive');
       return NextResponse.json({ message: 'Invalid credentials or account disabled' }, { status: 401 });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);//مقارنة كلمة المرور المُدخلة مع كلمة المرور المُشفرة
     if (!isMatch) {
       console.log('Password mismatch');
       return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
     }
 
     console.log('Login successful, generating token');
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });// ينشاء توكن بستخدام معرف المستخدم ويتخزن بتوكن
 
-    const serialized = serialize('token', token, {
-      httpOnly: false, // الكوكي غير متاحة لجافا سكريبت من جانب العميل
-      secure: process.env.NODE_ENV === 'production', // الكوكي آمنة في بيئة الإنتاج
-      sameSite: 'strict', // الكوكي محمية من هجمات CSRF
+    const serialized = serialize('token', token, {//يكول لتوكن لكوكي
+      httpOnly: false, 
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'strict', 
       maxAge: 3600, // مدة صلاحية الكوكي (3600 ثانية = 1 ساعة)
       path: '/', // الكوكي متاحة في جميع المسارات
     });
 
     console.log('Token serialized');
-    const response = NextResponse.json({ message: 'Login successful' }, { status: 200 });
-    response.headers.set('Set-Cookie', serialized);
+    const response = NextResponse.json({ message: 'Login successful' }, { status: 200 });//تم تجهيز الكوكي
+    response.headers.set('Set-Cookie', serialized);//يتم تعيين الكوكي في رأس الاستجابة (لتخزين التوكن على جانب العميل).
 
     return response;
   } catch (error) {

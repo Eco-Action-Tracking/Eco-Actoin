@@ -73,7 +73,27 @@ const Footer = () => {
             className="text-center md:text-left"
           >
             <h3 className="text-3xl font-bold flex items-center justify-center md:justify-start mb-4">
-              <Heart className="mr-2 text-red-400" fill="currentColor" /> 
+            <svg
+              className="w-10 h-10 mr-2"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 9L15 3M15 3L9 9M15 3V21"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M3 15L9 21M9 21L15 15M9 21V3"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-blue-300">
                EcoStitch
               </span>

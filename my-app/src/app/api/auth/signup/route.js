@@ -85,10 +85,10 @@ export async function POST(request) {
     await connectDB();
     
     // Get request body
-    const body = await request.json();
+    const body = await request.json();//استخرج البيانات واحوله لجيسون
     const { username, email, password } = body;
 
-    // Validate input
+    // // التحقق من صحة المدخلات
     if (!username || !email || !password) {
       return NextResponse.json(
         { error: 'Please provide all required fields' },
@@ -96,8 +96,8 @@ export async function POST(request) {
       );
     }
 
-    // Check if user exists
-    const existingUser = await User.findOne({
+    // التحقق من وجود المستخدم
+    const existingUser = await User.findOne({//للبحث عن مستخدم
       $or: [{ email }, { username }]
     });
 
@@ -119,9 +119,9 @@ export async function POST(request) {
       password: hashedPassword,
       isActive: true,
       isDeleted: false,
-      userAppointments: [], // Initialize as empty array
-      userOrders: [],       // Initialize as empty array
-      userDiscount: [],     // Initialize as empty array
+      userAppointments: [], 
+      userOrders: [],       
+      userDiscount: [],     
     });
 
     return NextResponse.json(
