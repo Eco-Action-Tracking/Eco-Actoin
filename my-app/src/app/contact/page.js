@@ -18,13 +18,14 @@ export default function ContactPage() {
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
+        headers: {//JSONيحدد نوع المحتوى الذي يتم إرساله وهو 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ firstName, lastName, email, message }),
       });
-      const data = await res.json();
-      if (data.success) {
+      
+      const data = await res.json();//من ينجح لاستجابه احولو لجيسون
+      if (data.success) {// يعني اخادم اكد نجاح عمليهsuccess يتاكد اذا 
         Swal.fire('Success!', 'Your message has been sent successfully.', 'success');
         setFirstName('');
         setLastName('');
@@ -35,7 +36,7 @@ export default function ContactPage() {
       }
     } catch (error) {
       Swal.fire('Error!', 'An error occurred. Please try again.', 'error');
-    } finally {
+    } finally {//وقف التحميل
       setLoading(false);
     }
   };
@@ -44,12 +45,12 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div
-        className="bg-indigo-900 text-white py-16 bg-cover bg-center flex items-center justify-center"
+        className="bg-indigo-900 text-white py-16 bg-cover bg-center flex items-center justify-center h-96"
         style={{
-          backgroundImage: `url('https://images.squarespace-cdn.com/content/v1/59f38ad78a02c7a1de136989/1551980990430-CYJP90CLSFL5GJ1JTNO9/image-asset.jpeg')`,
+          backgroundImage: `url('https://www.aftersybil.com/wp-content/uploads/2023/03/Frayed-Jeans.webp')`,
         }}
       >
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center bg-[#1b1b1b8a] rounded-xl p-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
           <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
             We're here to help and answer any questions you might have. 
@@ -141,7 +142,7 @@ export default function ContactPage() {
                 <ContactItem 
                   icon={<Phone className="h-6 w-6" />}
                   title="Phone"
-                  content="+1 (333) 123-4567"
+                  content="+962 7851515602"
                 />
                 <ContactItem 
                   icon={<Mail className="h-6 w-6" />}
@@ -151,7 +152,7 @@ export default function ContactPage() {
                 <ContactItem 
                   icon={<MapPin className="h-6 w-6" />}
                   title="Address"
-                  content="123 Green Street, Eco City, EC 12345"
+                  content="123 Amman , Jordan"
                 />
                 <ContactItem 
                   icon={<Clock className="h-6 w-6" />}
