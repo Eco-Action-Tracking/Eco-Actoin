@@ -132,8 +132,8 @@ const ProfilePage = () => {
 
   if (!user) {
     return (
-      <div className="flex justify-center items-center h-screen bg-green-50">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+      <div className="flex justify-center items-center h-screen bg-indigo-50">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
       </div>
     );
   }
@@ -152,10 +152,10 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-green-50 p-10">
+    <div className="min-h-screen bg-indigo-50 p-10">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="p-5 border-b">
-          <h2 className="text-2xl font-semibold text-green-800">{user.username}</h2>
+          <h2 className="text-2xl font-semibold text-indigo-600">{user.username}</h2>
           <p className="text-gray-600">{user.email}</p>
         </div>
         <div className="flex border-b">
@@ -168,8 +168,8 @@ const ProfilePage = () => {
               key={item.id}
               className={`flex items-center py-3 px-4 transition-colors duration-200 ${
                 activeTab === item.id
-                  ? 'bg-green-500 text-white'
-                  : 'text-gray-600 hover:bg-green-100'
+                  ? 'bg-indigo-500 text-white'
+                  : 'text-gray-600 hover:bg-indigo-100'
               }`}
               onClick={() => setActiveTab(item.id)}
             >

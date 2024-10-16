@@ -94,12 +94,12 @@ const Appointments = ({ userId }) => {
       transition={{ duration: 0.5 }}
       className="bg-white p-6 rounded-lg shadow-lg"
     >
-      <h2 className="text-2xl font-semibold mb-4 text-green-800">Appointments</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-indigo-600">Appointments</h2>
       <div className="space-y-6">
         <div>
-          <h3 className="text-xl font-semibold mb-2 text-green-700">Scheduled Appointments</h3>
+          <h3 className="text-xl font-semibold mb-2 text-indigo-500">Scheduled Appointments</h3>
           {appointments.scheduled.map(appointment => (
-            <div key={appointment._id} className="border p-4 rounded-md mb-2 bg-green-50">
+            <div key={appointment._id} className="border p-4 rounded-md mb-2 bg-indigo-50">
               <p className="text-gray-700">Date: {new Date(appointment.available_id.available_date).toLocaleDateString()}</p>
               <p className="text-gray-700">Time: {appointment.available_id.available_start_time} - {appointment.available_id.available_end_time}</p>
               <p className="text-gray-700">Status: {appointment.status}</p>
@@ -107,9 +107,9 @@ const Appointments = ({ userId }) => {
           ))}
         </div>
         <div>
-          <h3 className="text-xl font-semibold mb-2 text-green-700">Completed Appointments</h3>
+          <h3 className="text-xl font-semibold mb-2 text-indigo-500">Completed Appointments</h3>
           {appointments.completed.map(appointment => (
-            <div key={appointment._id} className="border p-4 rounded-md mb-2 bg-green-50">
+            <div key={appointment._id} className="border p-4 rounded-md mb-2 bg-indigo-50">
               <p className="text-gray-700">Date: {new Date(appointment.available_id.available_date).toLocaleDateString()}</p>
               <p className="text-gray-700">Time: {appointment.available_id.available_start_time} - {appointment.available_id.available_end_time}</p>
               <p className="text-gray-700">Status: {appointment.status}</p>
