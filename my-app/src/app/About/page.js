@@ -7,12 +7,13 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div
-        className="bg-green-900 text-white py-16 bg-cover bg-center flex items-center justify-center"
+        className="bg-green-900 h-96
+         text-white py-16 bg-cover bg-center flex items-center justify-center"
         style={{
           backgroundImage: `url('https://www.purlsoho.com/media/wysiwyg/CleanShot_2024-06-05_at_10.35.30.png')`, 
         }}
       >
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center bg-[#1b1b1b8a] rounded-xl p-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
           <p className="text-xl text-green-100 max-w-2xl mx-auto">
             Learn more about our mission, values, and the people behind our eco-friendly initiatives.
@@ -59,19 +60,29 @@ export default function AboutPage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <TeamMember 
-              name="John Doe" 
-              position="Founder & CEO" 
-              imageUrl="https://i.pravatar.cc/150?img=8" // ضع مسار الصورة
+              name="Omar" 
+              position="Scrum Master" 
+              imageUrl="https://media-hbe1-1.cdn.whatsapp.net/v/t61.24694-24/427571503_479256251524801_2534868589826350123_n.jpg?ccb=11-4&oh=01_Q5AaIG-P76VBpS5lQmp5Kom-Bc2lkh4rtKFrBAfg9JFAzraH&oe=671B5E86&_nc_sid=5e03e0&_nc_cat=110" // ضع مسار الصورة
             />
             <TeamMember 
-              name="Jane Smith" 
-              position="Chief Sustainability Officer" 
-              imageUrl="https://e7.pngegg.com/pngimages/1/723/png-clipart-graphy-business-portrait-business-people-public-relations.png" // ضع مسار الصورة
+              name="Mariam" 
+              position="Product Owner" 
+              imageUrl="https://media-hbe1-1.cdn.whatsapp.net/v/t61.24694-24/432244290_936157804936793_4744127954539495901_n.jpg?ccb=11-4&oh=01_Q5AaIHNg4GQut5D5paCbAv07oF4_4JzgVafZ4GRa2XFz089A&oe=671B4263&_nc_sid=5e03e0&_nc_cat=106" // ضع مسار الصورة
             />
             <TeamMember 
-              name="Michael Lee" 
-              position="Head of Operations" 
-              imageUrl="https://chirothin.com/wp-content/uploads/2014/08/consultexpert.jpg" // ضع مسار الصورة
+              name="Abdullah" 
+              position="QA" 
+              imageUrl="https://media-hbe1-1.cdn.whatsapp.net/v/t61.24694-24/350388296_997204528092133_3819774619352640934_n.jpg?ccb=11-4&oh=01_Q5AaIAAXzClfbFWZy2w--4d02cekNAmMuvYMh7vbXq0NdtNv&oe=671B662B&_nc_sid=5e03e0&_nc_cat=109" // ضع مسار الصورة
+            />
+             <TeamMember 
+              name="Rafah Shreem" 
+              position="Developer" 
+              imageUrl="https://media-hbe1-1.cdn.whatsapp.net/v/t61.24694-24/321237949_1448483765870102_559730110937515241_n.jpg?ccb=11-4&oh=01_Q5AaIAda-IFwFHh7W58-IpODpUEkR2oXywVqC-JPYUMU-NAO&oe=671B5117&_nc_sid=5e03e0&_nc_cat=101" // ضع مسار الصورة
+            />
+             <TeamMember 
+              name="obadajawareh." 
+              position="Developer" 
+              imageUrl="https://media-hbe1-1.cdn.whatsapp.net/v/t61.24694-24/456611035_466324959758940_8361760503687785921_n.jpg?ccb=11-4&oh=01_Q5AaIJbyVkN9w5CxpjMQgIqX-HNzHLC-E0vR2mlpZnXOPNKl&oe=671B4F6C&_nc_sid=5e03e0&_nc_cat=104" // ضع مسار الصورة
             />
           </div>
         </section>

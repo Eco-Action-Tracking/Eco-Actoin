@@ -4,77 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 
-// const Orders = ({ userId }) => {
-//   const [orders, setOrders] = useState({ scheduled: [], completed: [] });
-
-//   useEffect(() => {
-//     const fetchOrders = async () => {
-//       try {
-//         const response = await fetch(`/api/profile/orders/${userId}`);
-
-//         if (response.ok) {
-//           const data = await response.json();
-//           setOrders(data);
-//         } else {
-//           throw new Error('Failed to fetch orders');
-//         }
-//       } catch (error) {
-//         console.error('Error fetching orders:', error);
-//       }
-//     };
-
-//     fetchOrders();
-//   }, [userId]);
-
-//   return (
-//     <div>
-//       <h2 className="text-2xl font-semibold mb-4">Orders</h2>
-//       <div className="space-y-6">
-//         <div>
-//           <h3 className="text-xl font-semibold mb-2">Scheduled Orders</h3>
-//           {orders.scheduled.length > 0 ? (
-//             orders.scheduled.map(order => (
-//               <div key={order._id} className="border p-4 rounded mb-2">
-//                 <p>Products:</p>
-//                 <ul>
-//                   {order.orderProducts.map(product => (
-//                     <li key={product._id}>{product.name}</li> // عرض أسماء المنتجات
-//                   ))}
-//                 </ul>
-//                 <p>Total Price: ${order.totalPrice}</p>
-//               </div>
-//             ))
-//           ) : (
-//             <p>No scheduled orders</p>
-//           )}
-//         </div>
-
-//         <div>
-//           <h3 className="text-xl font-semibold mb-2">Completed Orders</h3>
-//           {orders.completed.length > 0 ? (
-//             orders.completed.map(order => (
-//               <div key={order._id} className="border p-4 rounded mb-2">
-//                 <p>Products:</p>
-//                 <ul>
-//                   {order.orderProducts.map(product => (
-//                     <li key={product._id}>{product.name}</li> 
-//                   ))}
-//                 </ul>
-//                 <p>Total Price: ${order.totalPrice}</p>
-//               </div>
-//             ))
-//           ) : (
-//             <p>No completed orders</p>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Orders;
-
-
 const Orders = ({ userId }) => {
   const [orders, setOrders] = useState({ scheduled: [], completed: [] });
 
@@ -103,12 +32,12 @@ const Orders = ({ userId }) => {
       transition={{ duration: 0.5 }}
       className="bg-white p-6 rounded-lg shadow-lg"
     >
-      <h2 className="text-2xl font-semibold mb-4 text-green-800">Orders</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-indigo-600">Orders</h2>
       <div className="space-y-6">
         <div>
-          <h3 className="text-xl font-semibold mb-2 text-green-700">Scheduled Orders</h3>
+          <h3 className="text-xl font-semibold mb-2 text-indigo-500">Scheduled Orders</h3>
           {orders.scheduled.map(order => (
-            <div key={order._id} className="border p-4 rounded-md mb-2 bg-green-50">
+            <div key={order._id} className="border p-4 rounded-md mb-2 bg-indigo-50">
            <p className="text-gray-700">Products: {order.orderProducts.map(product => (
                     <span key={product._id}>{product.name}</span> 
                   ))}</p>
@@ -117,9 +46,9 @@ const Orders = ({ userId }) => {
           ))}
         </div>
         <div>
-          <h3 className="text-xl font-semibold mb-2 text-green-700">Completed Orders</h3>
+          <h3 className="text-xl font-semibold mb-2 text-indigo-500">Completed Orders</h3>
           {orders.completed.map(order => (
-            <div key={order._id} className="border p-4 rounded-md mb-2 bg-green-50">
+            <div key={order._id} className="border p-4 rounded-md mb-2 bg-indigo-50">
               
               <p className="text-gray-700">Products: {order.orderProducts.map(product => (
                     <span key={product._id}>{product.name}</span> 

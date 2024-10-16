@@ -227,17 +227,22 @@
 // };
 
 
-import { NextResponse } from 'next/server';
-import { jwtVerify } from 'jose'; // مكتبة jose للتحقق من JWT
 
-export async function middleware(request) {
+
+
+
+
+
+import { NextResponse } from 'next/server';//تُستخدم لإنشاء استجابات مخصصة مثل إعادة التوجيه
+import { jwtVerify } from 'jose'; // تُستخدم للتحقق من صحة الرموز المميزة
+
+export async function middleware(request) {//  استدعاؤه في كل مرة يصل فيها المستخدم إلى مسار معين.
   console.log('Middleware executing');
 
-  // استخراج الكوكي الخاصة بالرمز
-  const token = request.cookies.get('token')?.value;
+  const token = request.cookies.get('token')?.value;//ياخذ التوكن من الكوكي المرسلة مع الطلب
   console.log('Token from cookies:', token);
 
-  // إذا لم يكن هناك رمز JWT، قم بتوجيه المستخدم إلى صفحة تسجيل الدخول
+  // قم بتوجيه المستخدم إلى صفحة تسجيل الدخول JWT،إذا لم يكن هناك رمز ،       
   if (!token) {
     console.log('No token found, redirecting to login');
     return NextResponse.redirect(new URL('/login', request.url));
@@ -246,20 +251,20 @@ export async function middleware(request) {
   try {
     console.log('Attempting to verify token');
 
-    // التحقق من صحة الرمز باستخدام مكتبة jose
+    // jwtVerify التحقق من صحة الرمز باستخدام 
     const { payload } = await jwtVerify(
-      token, 
-      new TextEncoder().encode(process.env.JWT_SECRET)
+      token, //امرر التوكن
+      new TextEncoder().encode(process.env.JWT_SECRET)//JWT_SECRET: يتم تحويله إلى byte array باستخدام TextEncoder.
     );
 
-    // عرض المحتوى المشفر من الـ JWT
+    // payload إذا نجح التحقق، يتم طباعة محتويات
     console.log('Token verified, payload:', payload);
 
     // السماح بالمرور إلى الصفحة المطلوبة إذا كان الرمز صالحاً
     const response = NextResponse.next();
 
-    // إضافة userId إلى ترويسة الطلب
-    response.headers.set("userId", payload.id); // تأكد من استخدام 'id' بدلاً من 'userId'
+    // يتم إضافة معرف المستخدم إلى ترويسة الرد.
+    response.headers.set("userId", payload.id); //هي المفتاح الصحيح  idيجب أن تكون الـ 
     // إضافة بيانات المستخدم إلى ترويسة الرد
     // response.headers.set('user', JSON.stringify(payload));
     return response;
@@ -273,7 +278,7 @@ export async function middleware(request) {
   }
 }
 
-// تحديد المسارات التي يتم تطبيق الـ middleware عليها
+//عليهاmiddleware  تحديد المسارات التي يتم تطبيق الـ 
 export const config = {
   matcher: [
     '/profile/:path*',    // مسار الملف الشخصي

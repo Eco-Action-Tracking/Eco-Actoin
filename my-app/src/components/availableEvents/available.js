@@ -196,12 +196,11 @@
 
 
 
-// app/components/AvailableEvents.js
 "use client";
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Clock, DollarSign, UsersRound } from "lucide-react";
+import { Calendar, Clock, UsersRound } from "lucide-react"; // Remove unused icons
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -209,7 +208,7 @@ const AvailableEvents = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [userId, setUserId] = useState(null); // حالة لتخزين userId
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -226,23 +225,16 @@ const AvailableEvents = () => {
         setLoading(false);
       }
     };
-    
-    // استرداد userId من الكوكيز
-    // const token = document.cookie.split('; ').find(row => row.startsWith('token='));
-    // if (token) {
-    //   const decodedToken = JSON.parse(atob(token.split('.')[1])); // فك تشفير التوكن
-    //   setUserId(decodedToken.userId); // تعيين userId
-    // }
-    // استرداد userId من الكوكيز
-const token = document.cookie.split('; ').find(row => row.startsWith('token='));
-if (token) {
-  const decodedToken = JSON.parse(atob(token.split('.')[1])); // فك تشفير التوكن
-  setUserId(decodedToken.userId); // تعيين userId
-} else {
-  console.error("No token found in cookies");
-}
 
-    
+    // Get the token from cookies and decode it
+    const token = document.cookie.split("; ").find((row) => row.startsWith("token="));
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      setUserId(decodedToken.userId);
+    } else {
+      console.error("No token found in cookies");
+    }
+
     fetchEvents();
   }, []);
 
@@ -270,9 +262,8 @@ if (token) {
         const appointmentResponse = await axios.post(`/api/appointments/${userId}`, {
           available_id: event._id,
         });
-        
 
-        if (appointmentResponse.status !== 201) { // 201 هو الكود الصحيح عند نجاح الحجز
+        if (appointmentResponse.status !== 201) {
           throw new Error("Failed to book the appointment");
         }
 
@@ -287,6 +278,7 @@ if (token) {
     }
   };
 
+  // Render loading, error, or the list of events
   if (loading) return <div className="text-center py-20">Loading...</div>;
   if (error)
     return <div className="text-center py-20 text-red-500">Error: {error}</div>;
@@ -301,7 +293,7 @@ if (token) {
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold mb-4 text-indigo-800">
-            Available Work Shops
+            Available Workshops
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Browse our upcoming events and book your spot today!
@@ -314,23 +306,39 @@ if (token) {
               whileHover={{ scale: 1.03 }}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
+              {/* Display event image */}
+              {event.img_url && (
+                <img
+                  src={event.img_url}
+                  alt={event.name}
+                  className="w-full h-48 object-cover"
+                />
+              )}
               <div className="p-6">
+                {/* Display event name */}
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                  {event.name}
+                </h3>
+                {/* Display event date */}
                 <div className="flex items-center mb-4">
                   <Calendar className="text-indigo-500 mr-2" />
                   <span className="text-gray-700">
                     {new Date(event.available_date).toLocaleDateString()}
                   </span>
                 </div>
+                {/* Display event time */}
                 <div className="flex items-center mb-4">
                   <Clock className="text-indigo-500 mr-2" />
                   <span className="text-gray-700">
                     {event.available_start_time} - {event.available_end_time}
                   </span>
                 </div>
+                {/* Display number of subscribers */}
                 <div className="flex items-center mb-6">
                   <UsersRound className="text-indigo-500 mr-2" />
-                  <span className="text-gray-700">{event.numSubscribers}</span>
+                  <span className="text-gray-700">{event.numSubscribers} Subscribers</span>
                 </div>
+                {/* Button to book the event */}
                 <button
                   onClick={() => handleBook(event)}
                   className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
