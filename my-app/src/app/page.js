@@ -6,7 +6,7 @@ import React from 'react';
 // import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
-import Whatdo from '../components/Whatdo';
+// import Whatdo from '../components/Whatdo';
 // import Footer from '../components/Footer';
 import ClothingLifecycle from '../components/ClothingLifecycle';
 // import CommunityShowcase from '../components/CommunityShowcase';
@@ -33,7 +33,7 @@ const HomePage = () => {
       {/* <Header /> */}
       <Hero />
       <Services />
-      <Whatdo />
+      {/* <Whatdo /> */}
       <AvailableEvents/>
       <ClothingLifecycle />
       {/* <CommunityShowcase /> */}

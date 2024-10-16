@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req) {
   // Allow only GET requests
-  console.log("test");
 
   const token = req.cookies?.get('token')?.value; // Retrieve the cookie with Next.js cookies API
 

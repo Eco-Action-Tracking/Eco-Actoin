@@ -403,6 +403,17 @@
 // };
 
 // export default Header;
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+>>>>>>> 0e6ccc9e56124d06c54774fc4e6570d94838c0db
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {

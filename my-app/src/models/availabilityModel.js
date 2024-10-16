@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 const availabilitySchema = new Schema(
   {
+    name: { type: String, required: true }, // Added name field
     available_date: { type: Date, required: true },
     available_start_time: { type: String, required: true },
     available_end_time: { type: String, required: true },
-    price: { type: Number },
-    numSubscribers: { type: Number },  // Corrected from `numSubcribers` to `numSubscribers`
+    img_url: { type: String }, // Added img_url field
+    numSubscribers: { type: Number },
     is_deleted: { type: Boolean, default: false },
   },
   {
@@ -15,8 +16,6 @@ const availabilitySchema = new Schema(
   }
 );
 
-// Check if the model is already defined before creating it
 const Availability = mongoose.models.Availability || mongoose.model("Availability", availabilitySchema);
 
 module.exports = Availability;
-  
